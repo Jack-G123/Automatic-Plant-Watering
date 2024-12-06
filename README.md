@@ -8,7 +8,6 @@ Project Capabilities
 We have a small amount of capabilities now, but by setting up the foundation for a project like this, many different options can be added to it. The following details our capabilities for the build.
 1. We have a soil sensor that will constantly tell the user the dryness of the soil when running
 2. A motor to pump water into the chosen plant using the readings
-3. Maybe more
 
 The Team
 1. Jack Goodwin - Freshman Electrical Engineering Major - Worked mainly on code and connections for Raspeberry Pi
