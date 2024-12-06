@@ -1,1 +1,40 @@
+# This code was written by Jack Goodwin, Matthew Potts
+# Email: jhgoodwin42@tntech.edu, mrpotts43@tntech.edu
+# ECE 1000 Explorations in ECE Final Project
+# Professor: Dr. Bhattacharya
+# Automatic Plant Watering System
 
+
+#import items for moisture sensor
+from machine import ADC, Pin
+import utime
+    
+#pin for relay
+Wpump = Pin(13, mode=Pin.OUT)
+#pin for sensor
+Msensor = ADC(Pin(27))
+#min and max moisture levels
+maximum_level = 27100
+minimum_level = 57100
+#Makes the min and max levels easier to write in
+def percent_moisture(sensor_value):
+    x1 = minimum_level
+    x2 = maximum_level
+     # This will change the value to be in percent so that it can be read
+    return max(0, min(100, int((x2 - sensor_value) * 100 / (x2 - x1))))
+
+#read and print mositure level
+while True:
+    sensor_value = Msensor.read_u16()
+    level_percent = percent_moisture(sensor_value)
+    #show percent on computer
+    print(f"Moisture Level: {level_percent}%")
+#turn pump on when water levels are low
+    if level_percent < 30:
+        Wpump.value(0)
+        
+        #turn off pump once it reaches the optimum mositure level
+    if level_percent > 30:
+        Wpump.value(1)
+    utime.sleep(0.8)
+        
